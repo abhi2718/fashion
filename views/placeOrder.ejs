@@ -1,0 +1,145 @@
+<%- include('partials/header') -%>
+<style>
+.orderDetail a
+	{   
+		font-size:13px;
+	}
+.address a
+	{
+		font-size:13px;
+		color:blue;
+	}
+
+</style>
+
+<div class="d-none d-sm-none d-md-block"><p>&nbsp;&nbsp;&nbsp;</p></div>
+ <div class="container mycart mt-md-5 mt-lg-5" style="box-shadow:5px 5px 3px rgba(0,0,0,0.6);">
+	   <div class="row">
+	       <div class="col-6 col-sm-6 pt-3">
+		     <p style="color:#fff ;" >Order detail</p>
+		   </div>
+		    <div class="col-6 col-sm-6  pt-3">
+		     <p style="color:#fff;float:right;" >
+				 <i class="fa fa-circle" aria-hidden="true" style="color:blue;font-size:10px; "></i>
+				 <%= currentUser.username %> 
+			</p>
+		   </div>
+	   </div>
+</div>
+
+<div class="container bg-light">
+   <div class="row">
+	  <div class="col-12 col-sm-12 col-md-8 py-2">
+	      <div class="address img-thumbnail" style="box-shadow:5px 5px 3px rgba(0,0,0,0.6);">
+		   <h5>Shipping Address</h5>
+		
+		   <a><%= order.shipping.pincode %> ,<%= order.shipping.shippingAddress %> </a>
+			  <br>
+			  <a>shippingCity : <%= order.shipping.shippingCity%></a>
+			  
+			  <a class="ml-2">Mobile No : <%= order.phone%></a>
+		   </div>
+	   </div>
+	   <div class="col-12 col-sm-12 col-md-4 py-2">
+		   <div class="address img-thumbnail" style="box-shadow:5px 5px 3px rgba(0,0,0,0.6);">
+		   <h5>Payment Method</h5>
+		   <a><%= order.shipping.paymentMethod  %></a>
+		   </div>
+	   </div>
+	</div>
+
+</div>
+
+
+<div class="container ">
+    <div class="row bg-light">
+	    <div class="col-12 col-sm-12 col-md-8 ">
+			<!-- +++++++++++++++++++++ -->
+			     <div class="row px-2">
+	              <div class="col-6 col-sm-6 pt-3">
+		           <p style="color:blue ;" >Order Iteams</p>
+		          </div>
+		        <div class="col-6 col-sm-6 pt-3 pr-lg-4 ">
+		         <p style="color:blue;float:right;"> Price</p>
+		       </div>
+	           </div>
+			
+			<!-- +++++++++++++++++++++ -->
+			<%if(path===0){%>
+			<% order.myCart.forEach(function(data){%>
+		   <div class="orderDetail mb-3" style="box-shadow:5px 5px 3px rgba(0,0,0,0.6);">
+			  <div class="row  m-1">
+			      <div class="col-2 p-0 ">
+				  <img src="<%= data.img %>" width="100%" height="100px" class="p-0">
+				  </div>
+			      <div class="col-6">
+				   <a><%= data._id %></a>
+					  <br>
+					  <a style="color:blue"><%= data.pn %></a>
+					  <br>
+					  <a style="color:green">Qty : <%= data.cartQty %></a>
+					  <br>
+					  <a> size : <%= data.Size %></a>
+				  </div>
+			      <div class="col-4 ">
+				    <a style="float:right">₹ <%= data.price %>.00</a>
+				  </div>
+			   </div>
+		</div> 
+			<%});%>
+			<%}%>
+			<%if(path===1){%>
+			   <div class="orderDetail mb-3" style="box-shadow:5px 5px 3px rgba(0,0,0,0.6);">
+			  <div class="row  m-1">
+			      <div class="col-2 p-0 ">
+				  <img src="<%= order.buy_now.img %>" width="100%" height="100px" class="p-0">
+				  </div>
+			      <div class="col-6">
+				   <a><%= order.buy_now._id %></a>
+					  <br>
+					  <a style="color:blue"><%= order.buy_now.pn %></a>
+					  <br>
+					  <a style="color:green">Qty : <%= order.buy_now.cartQty %></a>
+					  <br>
+					  <a> size : <%= order.buy_now.Size %></a>
+				  </div>
+			      <div class="col-4 ">
+				    <a style="float:right">₹ <%= order.buy_now.price %>.00</a>
+				  </div>
+			   </div>
+		   </div> 
+			<%}%>
+		</div>
+		<div class="col-12 col-sm-12 col-md-4 px-3 mt-4">
+		    <div class="orderSummary p-2" style="box-shadow:5px 5px 3px rgba(0,0,0,0.6);">
+			    <h4 class="text-center p-2" style="box-shadow:5px 5px 3px rgba(0,0,0,0.6);">Order Summary</h4>
+				<hr>
+				<a>Items</a>
+				<a style="float:right">₹ <%= subTotal %></a>
+				<br>
+				
+				<a>Shipping</a>
+				<a style="float:right">Free</a>
+				<br>
+				
+				<a>Tax</a>
+				<a style="float:right">₹25.25</a>
+				<br>
+				<a><strong> Order Total </strong></a>
+				<a style="float:right"><strong> ₹<%= total %></strong></a>
+				<br>
+				<br>
+				<a href="/cloths/payment" style="text-decoration:none">
+					<button class="btn btn-primary btn-block" >Place Order
+					</button>
+				</a> 
+			</div>
+		
+		
+		</div>
+	</div>
+
+
+</div>
+
+<%- include('partials/footer') -%>

@@ -1,0 +1,46 @@
+
+   
+</body>
+<script type="text/javascript">
+	   function menu()
+       {
+		   
+	    $(".sidebar").slideToggle(1000);
+		   
+       }
+		
+		$("#menu2").click(function(){
+			$(".sidebar").slideToggle(1000);
+			
+		});
+		
+		$("#btn").click(function(){ 
+			
+        if( $(".sidebar").css("display")==="block")
+         {  
+		  $(".sidebar").css("display","none");
+			 $("#toggle").slideToggle(1000);
+		 }
+        else
+		{ 
+			$("#toggle").slideToggle(1000);
+		}
+			
+			
+		});
+		
+		$(".btn_side").click(function(){
+			if( $("#toggle").css("display")==="flex")
+         {  
+		     $("#toggle").css("display","none");
+			 $(".sidebar").slideToggle(1000);
+		 }
+        else
+		{ 
+			$(".sidebar").slideToggle(2000);
+		}
+
+		});
+		
+</script>
+</html>

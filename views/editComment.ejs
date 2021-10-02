@@ -1,0 +1,26 @@
+
+<%- include('partials/header') -%>
+<div><p class="mt-lg-4">&nbsp;&nbsp;&nbsp;&nbsp;</p></div>
+
+<div class="container mt-lg-5">
+<div class="row mt-lg-5">
+	<div class="col-lg-3 col-md-3 col-12"></div>
+	<div class="col-lg-6 col-md-6 col-12 bg-light pb-4" style="box-shadow: 5px 5px 2px rgba(0,0,0,0.3);">
+		<h3 class="text-center p-2" style="box-shadow: 5px 5px 2px rgba(0,0,0,0.3);">Edit Your's Comment</h3>
+		<hr>
+	<form action="/cloths/editComment/<%=com_id %>/product/<%= p_id %>/gender/<%=cat%>?_method=PUT" method="post">
+  
+      <div class="form-group">
+      <label for="image">Comment</label>
+       <input type="text" class="form-control" id="image" required placeholder="Edit Your's comment"  name="text" value="<%= comment.text %>" style="box-shadow: 5px 5px 2px rgba(0,0,0,0.3);">
+      </div>
+      <button type="submit" class="btn btn-outline-primary btn-block" style="box-shadow: 5px 5px 2px rgba(0,0,0,0.3);">Update</button>
+      </form>
+	  </div>
+	   <div class="col-lg-3 col-md-3 col-12"></div>
+	
+</div>
+</div>
+
+
+<%- include('partials/footer') -%>

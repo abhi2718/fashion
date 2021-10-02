@@ -1,0 +1,81 @@
+<%- include('partials/header') -%>
+<style>
+.mycart
+{
+   box-shadow:5px 5px 3px rgba(0,0,0,0.6);
+  
+}
+.price,form button,button
+	{
+		box-shadow:5px 5px 3px rgba(0,0,0,0.6);
+	}
+
+</style>
+<div class="d-none d-sm-none d-md-block"><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></div>
+   <div class="container mycart mt-lg-5">
+	   <div class="row">
+	       <div class="col-6 col-sm-6 pt-3">
+		     <p style="color:#fff ;" >Wishlist</p>
+		   </div>
+		    <div class="col-6 col-sm-6  pt-3">
+		     <p style="color:#fff;float:right;" >
+				 <i class="fa fa-circle" aria-hidden="true" style="color:blue;font-size:10px; "></i>
+				 <%= currentUser.username %> 
+			</p>
+		   </div>
+	   </div>
+	</div>
+<% if(w_count>0){%>
+<div class="container mt-3" style="background-color:#fff">
+   <div class="row"> 
+	   <div class="col-12 col-sm-12 col-md-6 col-lg-8">
+		  <%  wish.forEach(function(data){%>
+		   <div class="row price mb-2 p-0" >
+		       <div class="col-4 col-sm-4">
+			      <img src="<%= data.img %>" width="100%" height="150px">
+			   </div>
+		       <div class="col-8 col-sm-8">
+			       <a style="font-size:14px;color:blue;text-decoration:none"><%= data.pb %></a>
+			       <a style="float:right;font-size:15px;color:blue;text-decoration:none">Price: ₹<%= data.price %>.00</a>
+				  <br>
+				  <a style="font-size:14px;color:gray;text-decoration:none"><%= data.pn %></a>
+				  <br>
+				  <a style="font-size:14px;color:green;text-decoration:none">In stock</a>
+				  <br>
+				  <a style="font-size:14px;color:blue;text-decoration:none">Eligible for FREE shipping</a>
+				   <div class="pt-3 pb-2 " style="border-top:1px solid black">
+				 <a href="/cloths/wishlistTocart/<%=data.p_id%>/data/<%= data._id%>/gen/<%=data.gen %>">
+					<button type="submit" class="btn btn-outline-primary">
+						<i class="fa fa-shopping-cart">
+						</i> Add to cart
+					</button>
+				 </a>
+					<a href="/cloths/deleteWishlist/<%=data._id %>">
+						<button type="button" class="btn btn-outline-primary btn-sm" style="float:right">
+							<i class="fa fa-trash-o" aria-hidden="true"></i>
+						</button>
+					</a>
+					  
+					   
+				    
+			      </div>
+			   </div>
+			 </div>
+		   <%});%>
+		   
+	   </div>
+	  <div class="col-12 col-sm-12 col-md-6  col-lg-4 pt-3"> </div>
+	
+	</div>
+</div>
+<%}else {%>
+
+             <div class="mx-lg-5 px-lg-5"  >
+               <p class="img-thumbnail mt-4 p-2">Your's wishlist is empty .</p>
+            </div>
+
+<%}%>
+
+
+
+<%- include('partials/footer') -%>

@@ -1,0 +1,353 @@
+<%- include('partials/header') -%>
+ <style>
+	 body
+	  {
+		  scroll-behavior: smooth;
+	  }
+	  .img-product img
+	{
+		width:100%;
+		height:530px;
+		box-shadow:5px 5px 3px rgba(0,0,0,0.6);
+	}
+	  .product_details
+	  {    
+		  background-color: #fff;
+		  box-shadow:5px 5px 3px rgba(0,0,0,0.6);
+	  }
+	 .product_details ul li
+	  {
+		  font-size:14px;
+	  }
+	.product_details i
+	  {
+		  color: green;
+	  }
+	  .cart
+	  {
+		  background-color: #fff;
+		  
+	  }
+	 button,input
+	 {
+		 box-shadow:5px 5px 3px rgba(0,0,0,0.6); 
+	 }
+	 
+	 select 
+	 {
+		 width:100%;
+		 height:30px;
+		 border:none;
+		 border:1px solid blue;
+		 color:green;
+	   }
+	 
+	 
+.star{
+  color: goldenrod;
+  font-size: 2.4rem;
+	
+}
+
+.star::before{
+  content: '\2606';
+  cursor: pointer;
+}
+.star:hover::before{
+  /* the :hover should come first */
+  content: '\2605';
+  color: #bada55;
+}
+.star.rated::before{
+  /* the :hover should come first */
+  content: '\2605';
+}
+.inp
+	 {
+		 color:#2980b9;
+		 background-color:#fff;
+		 border:2px solid blue;
+	 }
+	 .wish 
+	 {
+		 position:absolute;
+		 top:20px;
+		 right:40px;
+		 font-size:30px;
+		 box-shadow:5px 5px 3px rgba(0,0,0,0.2);
+		 width:45px;
+		 height:45px;
+		 border-radius:50%;
+		 color:green;
+		 
+		
+	 }
+	 
+ </style> 
+
+<div class="container mt-5 pt-5">
+      <div class="row">
+	    <div class="col-12 col-sm-12 col-md-6 col-lg-4" style="position:relative">
+	       <div class="img-product mt-md-3  mt-lg-0" >
+			   <a href="/cloths/wishlist/<%= products._id %>/gender/<%= cat %>" class="wish bg-light">
+				   <i class="fa fa-heart-o pl-2"></i>
+			   </a>
+			 <img src="<%= products.img %>" class="img-fluid">
+		  </div>
+		 </div>
+		  
+		  <!-- ====================== product detail section start ========================-->
+		   <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+			   <div class="product_details mt-md-3  mt-lg-0 p-2 ">
+			   <a href="#"><%= products.pb %></a>
+			   <br>
+			   <h5><%= products.pn %></h5>
+			     <a>
+				   <% if(products.rating*10%10===0){%>
+				   
+			          <% for(var i=0;i<products.rating;i++){%>
+				      <i class="fa fa-star"></i>
+				     <%}%>
+				   
+				   <%}%>
+				   <% if(products.rating*10%10!=0){%>
+				   
+			          <% for(var i=0;i<products.rating-1;i++){%>
+				      <i class="fa fa-star"></i>
+				     <%}%>
+				   
+				   <%}%>
+				   
+				   <% if(products.rating*10%10!=0){%>
+						<i class="fa fa-star-half-o" aria-hidden="true"></i>	 
+					<%}%>
+				 </a> 
+				  <a href="#" class="ml-5"><%= products.rev %> reviews</a>
+				   <hr>
+				  <a>Price:₹ <%= products.price %>.00 (Inclusive of all taxes ) </a>
+				   
+				 <ul type="none" class="mt-3">
+			      <li> Fit Type : Slim Fit </li>
+			      <li> Fabric : 100% Cotton </li>
+			      <li> Style : Regular</li>
+			      <li> Pattern : Printed </li>
+			    </ul>
+				   
+				   <div class="cart  p-3 ">
+				  
+		          <a> Price</a>
+				  <a style="float:right">₹ <%= products.price %>.00</a>
+				  
+				  <form action="/cloths/cart/<%= products._id %>/gender/<%= cat %>" method="post">
+					  <a>State</a>
+					  <a style="float:right">In stock</a>
+					  <hr>
+					  <div class="row">
+					      <div class="col-6  ">
+							  <div class="row">
+							      <div class="col-3">
+									  <label for="size">Size &nbsp;&nbsp;&nbsp;</label>
+								  </div>
+							      <div class="col-9">
+									   <select name="size" required id="buy_size">
+							             <option value="x">X</option>
+							             <option value="xl">XL</option>
+							             <option value="m">M</option>
+							             <option value="n">N</option>
+							           </select>
+								  </div>
+							  </div>
+							</div>
+						 
+					      <div class="col-6  ">
+							  <div class="row">
+							      <div class="col-3">
+								      <label for="qty" class="" >Qty </label>
+								  </div>
+							      <div class="col-9">
+								    <select name="qty" style="float: right" required id="buy_qty">
+							        <option value="1">1</option>
+							        <option value="2">2</option>
+							        <option value="3">3</option>
+							        <option value="4">4</option>
+							        <option value="5">5</option>
+							        <option value="6">6</option>
+							        
+							      </select>
+								  </div>
+							   </div>
+							</div>
+					  </div>
+					  <button type="submit" class="btn btn-primary btn-block mt-2" style="color: ">Add to cart</button>
+					 </form>
+					  
+					   
+					   <form action="/cloths/buyNow/<%= products._id %>/gender/<%= cat %>" method="post">
+						   <input type="hidden" name="qty" id="in_qty" value="1">
+						   <input type="hidden" name="size" id="in_size" value="x">
+						  <button type="submit" class="btn btn-primary btn-block mt-2" style="color:">Buy Now</button>
+					   </form>
+					   
+					   <script type="text/javascript">
+						   var qty=document.querySelector("#buy_qty");
+						  
+						   qty.addEventListener("click",function(){
+							   document.querySelector("#in_qty").setAttribute("value",this.value);
+						   });
+						   var size=document.querySelector("#buy_size");
+						   size.addEventListener("click",function(){
+							   document.querySelector("#in_size").setAttribute("value",this.value);
+						   });
+						   
+							  
+						   
+					   </script>
+				  </div>
+		     </div>
+			 </div>
+		  
+		  
+		  
+		  <!-- ====================== product detail section end ==========================-->
+		  <div class="col-12 col-sm-12 col-md-6 col-lg-4 ">
+			  <div class="bg-light p-2" style=" box-shadow:5px 5px 3px rgba(0,0,0,0.6);">
+			   <!-- comment section -->
+				   <div class=" img-thumbnail" style="">
+				         <a href="#feed"  style="float:right">
+							 <button type="button" class="btn btn-outline-primary btn-sm " id="review">Add Review</button>
+					     </a>
+						 <br>
+					    <% var i=1 %>
+					   <% products.comments.forEach(function(data){%>
+					  
+					   <% if(i==1){%>
+					   <div class="">
+						   <a class="img-thumbnail bg-warning"  >
+							   <span style="color: #fff"><%= data.rating %></span>
+							   <i class="fa fa-star " style="color: #fff"></i>
+						   </a>
+					       <a class="ml-2"> Awesome </a>
+						   <hr>
+						   <a class="img-thumbnail " style="color:blue" href="#"><%= data.auther.name %></a>
+						   <a class="" style="float: right;color: green"><%= data.created.toDateString() %></a>
+						   <br><br>
+						   <div class="">
+						    <p class="text-center" style="font-size: 14px;"><%= data.text %></p>
+							      
+							   <form action="/cloths/comment/<%=  data._id%>/delete/<%= cat %>?_method=DELETE" method="post">
+								    <a href="/cloths/editComment/<%=  data._id%>/product/<%=products._id %>/gender/<%= cat %>" style="text-decoration: none">
+							        <button type="button" class="btn btn-primary btn-sm">Edit</button>
+							        </a>
+		                        <button type="submit" class="btn btn-danger btn-sm ">Delete</button>
+								   <a href="/cloths/comment/<%= products._id %>/review/<%= cat %>" style="text-decoration: none;float:right">
+							    <button type="button" class="btn btn-outline-primary btn-sm">Read more  </button>
+							   </a>
+					           </form>
+							     
+							   
+						   </div>
+					   </div>
+					   <% i=0 %>
+					   <%}%>
+					  
+					   
+					   <%});%>
+					   
+				   </div>
+				  
+				    <!-- comment section end-->
+		    
+			  <!--  ======================================= comment form========================================-->
+		               <div class="bg-light mt-2 img-thumbnail feedback " style="" id="feed">
+						   <h5 class="text-center bg-dark p-1"style=" box-shadow:5px 5px 3px rgba(0,0,0,0.6);color:#fff"> Give Feedback </h5>
+						   <hr>
+						      <form  action="/cloths/comment/<%= products._id %>/gender/<%= cat %>" method="post">
+								  <a>click on star to rate the product</a>
+								  <!-- =================================-->
+								  <div class="stars" data-rating="1" id="rate_data" style=" box-shadow:5px 5px 3px rgba(0,0,0,0.6); height:50px;">
+                                   <span class="star"></span>
+                                   <span class="star"></span>
+                                   <span class="star"></span>
+                                   <span class="star"></span>
+                                   <span class="star"></span>
+								   <span style="float:right;transform:translate(-40px,10px);font-size:25px;color:black"><span class="score">1</span>/5</span>
+                                  </div>
+		                          <input type="hidden" class="rate" name="rating" value="1">
+								 <!-- =================================-->
+						       
+							   <div class="form-group mt-2">
+                            <input type="text" name="comment" required class="comment form-control" placeholder=" Write your's comment" >
+                               </div>
+							   <button type="submit" class="btn-primary btn-block p-2" style="shadow:none">Comment</button>
+						      </form>
+						   </div>	  
+			  
+			  <!--  ======================================= comment form end ========================================-->
+		  </div>
+		  </div>
+      </div>
+	</div>	
+	
+	
+	
+
+
+
+<%- include('partials/footer') -%>
+<script type="text/javascript">
+	
+	 var rate=document.querySelector(".rate");
+	 var review=document.querySelector("#review");
+		 
+//initial setup
+document.addEventListener('DOMContentLoaded', function(){
+  addListeners();
+  setRating(); //based on value inside the div
+});
+
+function addListeners(){
+  var stars = document.querySelectorAll('.star');
+  [].forEach.call(stars, function(star, index){
+    star.addEventListener('click', (function(idx){
+      console.log('adding rating on', index);
+      document.querySelector('.stars').setAttribute('data-rating',  idx + 1);
+		
+        var star_data=document.querySelector('.stars').getAttribute('data-rating');
+		rate.setAttribute('value',star_data);
+		var score=document.querySelector('.score');
+		score.textContent=star_data;
+		var ans=rate.getAttribute('value',star_data);
+		console.log('Rating is now', idx+1);
+      setRating();
+    }).bind(window,index) );
+  });
+  
+}
+
+function setRating(){
+  var stars = document.querySelectorAll('.star');
+  var rating = parseInt( document.querySelector('.stars').getAttribute('data-rating') );
+  [].forEach.call(stars, function(star, index){
+    if(rating > index){
+      star.classList.add('rated');
+      console.log('added rated on', index );
+    }else{
+      star.classList.remove('rated');
+      console.log('removed rated on', index );
+    }
+  });
+}
+		
+
+var review=document.querySelector('#review');
+	review.addEventListener('click',function(){
+		var comment=document.querySelector('.comment');
+		comment.classList.toggle("inp");
+		comment.setAttribute("placeholder","PlZ give your's precious feedback")
+	});
+	
+	
+
+
+
+</script>

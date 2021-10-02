@@ -1,0 +1,109 @@
+<%- include('partials/header') -%>
+<style>
+ .product_img
+	{
+		width:100%;
+		height:100%;
+		box-shadow:5px 5px 3px rgba(0,0,0,0.6);
+		
+	}
+	.product_img img
+	{
+		width:100%;
+		height:250px;
+	}
+	.product_img a
+	{
+		color:#fff;
+		padding:1px 3px;
+	}
+	.product_img a:hover
+	{
+		color:#fff;
+		padding:1px 3px;
+	}
+	.product_img p span i
+	{
+		color:yellow;
+	}
+	.product_img p span i
+	{
+		font-size:13px;
+	}
+	.product_img p 
+	{
+		color:#fff;
+	}
+	.review:hover
+	{
+		text-decoration:none;
+	}
+	
+	.product_img button i
+	{
+		color:#fff;
+	}
+	.product_img button:hover i
+	{
+		color:white;
+	}
+	#review:hover
+	{
+		color:white;
+	}
+	button
+	{
+		box-shadow:5px 5px 3px rgba(102,90,890,0.6);
+	}
+</style>
+
+
+<!-- ============   Product section start from here =============================================-->
+		  <div class="container mt-5 ">
+			  <div class="row ">
+				  
+			  <% products.forEach(function(product){%>	
+				  
+			  <div class="col-12 col-sm-6 col-md-4 col-lg-3 px-5 px-sm-4 mt-5">
+				 
+				  <div class="product_img bg-dark  " > 
+					  <a href="/cloths/women/product/<%= product._id%>" class="">
+				        <img src="<%= product.img %>" class=" pr-1">
+					  </a>
+				  <a><%= product.pn %></a>	 
+				  <a style="float:right">&#8377; <%= product.price %> </a>	
+					 <p class="py-2 px-1"> <%= product.pb %>  <span style="float:right;"> 
+						 <% for(var i=1;i<=product.rating;i++){%>
+						 <i class="fa fa-star" aria-hidden="true"></i>
+						 <%}%>
+						 <% if(product.rating*10%10!=0){%>
+							<i class="fa fa-star-o" aria-hidden="true"></i>	 
+						 <%}%></span></p>
+				        <div class="row px-1">
+							<div class="col-3 ">
+							<form action="/cloths/cart/<%= product._id %>/gender/women" method="post">
+						      <input type="hidden" name="qty" value="1">
+						      <input type="hidden" name="size" value="x">
+						      <button type="submit" class="btn btn-outline-warning"><i class="fa fa-shopping-cart"></i></button>
+					       </form>
+							</div>
+							<div class="col-3  ">
+						       <a href="/cloths/wishlist/<%= product._id %>/gender/women"><button type="button" class="btn btn-outline-warning    mb-2"><i class="fa fa-heart-o"></i> </button></a>
+							</div>
+							<div class="col-6  pt-2">
+								<a href="#" class="" style="text-decoration:none; font-size:15px; float:right" id="review"> <%= product.rev %> reviews </a>
+							</div>
+						 </div>	 
+				   
+				  </div>
+				  
+			  </div>
+				  
+			  <%});%>
+			  </div>
+		  </div>
+		
+<!-- ============   Product section end from here =============================================-->
+
+
+<%- include('partials/footer') -%>

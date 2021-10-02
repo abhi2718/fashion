@@ -1,0 +1,336 @@
+<%- include('partials/header') -%>
+<style>
+#register
+	{
+	
+	
+	}
+	label,h3
+	{
+		color:white;
+		
+	}
+  h3,input,button
+	{
+		 box-shadow: 5px 5px 2px rgba(0,0,0,0.3);
+	}
+
+     .mess
+		{
+			color: #fff;
+			
+		}
+	.success
+		{
+			color: #fff;
+		}
+	.flush
+	{
+		box-shadow: 5px 5px 2px rgba(0,0,0,0.3);
+	}
+
+</style>
+
+<div class="container">
+
+	<div class="d-none d-sm-none d-md-block" ><p>&nbsp;</p></div>
+       <%if(success && success.length>0 || error && error.length>0){%>
+		<div class="d-none d-sm-none d-md-none" >&nbsp;</div>
+	<%}else{%>
+	   <div class="d-block d-sm-block d-md-none" >&nbsp;</div>
+	<%}%>
+  	<% if(success && success.length>0){ %>
+       <div class="">
+	    <div class="row ">
+		 <div class="col-12 col-sm-12 col-md-3"></div>
+		    <div class="col-12 col-sm-12 col-md-6 flush">
+				<p class="text-center" style="color:#fff"><strong>Warning!</strong><%= success %></p>
+			</div>
+		 <div class="col-12 col-sm-12 col-md-3"></div>
+		</div>
+	</div>
+	<%}%> 
+	<% if(error && error.length>0){ %>
+	<div class="flush">
+	    <div class="row">
+		 <div class="col-12 col-sm-12 col-md-3"></div>
+		    <div class="col-12 col-sm-12 col-md-6 mt-5">
+				<p class="text-center" style="color:#fff"><strong>Warning!</strong> <%= error %></p>
+			</div>
+		 <div class="col-12 col-sm-12 col-md-3"></div>
+		</div>
+	</div>
+	<%}%>
+		
+	<div class="row">
+		<div class="col-lg-3 col-md-3 col-sm-12"></div>
+		<div class="col-lg-6 col-md-6 col-sm-12 mt-md-5 mt-lg-5 " id="register">
+  
+  <form  onsubmit=" return validation()" class="" action="/cloths/register" method="post" >
+	  <h3 class="text-center p-2">Registration</h3>
+	  
+	<div class="form-group">
+      <label for="uname">Username</label>
+      <input type="text" class="form-control" required  autocomplete="off" onkeyup=" return unameValidation()" id="uname" placeholder="Username" name="username" >
+	  <span class="mess" ></span>
+    </div>
+	  
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" required  autocomplete="off"  id="email" onkeyup=" return emailvalidation()"  placeholder="Enter email" name="email">
+	  <span class="mess"></span>
+    </div>
+	  
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control"  required   autocomplete="off" id="pwd" onkeyup="return  passwordvalidation()"  placeholder="Enter password" name="password">
+	  <span class="mess"></span>
+    </div>
+	
+	<div class="form-group">
+      <label for="phone">Mobile Number</label>
+      <input type="number" class="form-control"  required   autocomplete="off"   id="phone" onkeyup="return phoneValidation()" placeholder="Mobile number" name="phone">
+	  <span class="mess"></span>
+    </div>
+	  
+	 <div class="form-group">
+      <label for="add">Address</label>
+      <input type="text" class="form-control"   required  autocomplete="off"   id="add" onkeyup="return addvalidation()" placeholder="Address" name="add">
+	  <span class="mess"></span>
+    </div>
+	  
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+   </form>
+			
+   </div>
+<div class="col-lg-3 col-md-3 col-sm-12"></div>
+</div>
+</div>
+</body>
+	<script type="text/javascript" >
+	
+	
+var uname=document.querySelector("#uname");
+var email=document.querySelector("#email");
+var pwd=document.querySelector("#pwd");
+var phone=document.querySelector("#phone");
+var add=document.querySelector("#add");
+var mess=document.querySelectorAll(".mess");
+
+function validation()
+{
+	return unameValidation();
+}
+
+
+function unameValidation()
+{
+	if(uname.value.length===0)
+		{
+			mess[0].textContent="Please fill this field";
+			mess[0].classList.remove("success");
+			mess[0].classList.add("mess");
+			return false;
+		}
+	if(uname.value.length<=3)
+		{
+			mess[0].textContent="Username must be greater than 3 character";
+			mess[0].classList.remove("success");
+			mess[0].classList.add("mess");
+			return false;
+		}
+		
+	if(uname.value.length>3 )
+		{
+			if(isNaN(uname.value))
+				{
+					if(Number(uname.value[0]) || Number(uname.value[1]) || Number(uname.value[2]))
+						{
+							mess[0].textContent=" Invalid username, Please foll this patten abhi123";
+							mess[0].classList.remove("success");
+							mess[0].classList.add("mess");
+			                return false;
+						}
+					else
+						{
+							mess[0].textContent=" username is valid";
+							mess[0].classList.remove("mess");
+							mess[0].classList.add("success");
+							return emailvalidation();
+			             }
+				}
+			else
+				{
+					mess[0].textContent=" Number can't taken as username ";
+					mess[0].classList.remove("success");
+					mess[0].classList.add("mess");
+			        return false;
+				}
+			
+			
+		}
+	
+}
+
+// email validation
+function emailvalidation()
+{    var patten= /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	if(email.value.length===0)
+		{
+			mess[1].textContent="Please fill the field";
+			mess[1].classList.remove("success");
+			mess[1].classList.add("mess");
+			return false;
+		}
+     if(email.value.length>0)
+		 {
+			if(email.value.match(patten))
+		     {
+			   mess[1].textContent="Email is valid";
+			   mess[1].classList.remove("mess");
+			   mess[1].classList.add("success");
+				return  passwordvalidation();
+		     } 
+			 else
+				 {
+					 mess[1].textContent="Please enter valid email ";
+					 mess[1].classList.remove("success");
+			         mess[1].classList.add("mess");
+					 return false;
+				 }
+		 }
+	
+}
+// password validation
+function passwordvalidation()
+{
+	if(pwd.value.length===0)
+		{
+			mess[2].textContent="Please fill this field";
+			mess[2].classList.remove("success");
+			mess[2].classList.add("mess");
+			return false;
+		}
+	if(pwd.value.length>6)
+		{
+			if(pwd.value.length<=10)
+				{
+				   mess[2].textContent="Password is valid";
+				   mess[2].classList.remove("mess");
+				   mess[2].classList.add("success");
+					return phoneValidation();
+				}
+			else
+				{
+					mess[2].textContent="Password can't be greater than 10 character";
+					mess[2].classList.remove("success");
+			        mess[2].classList.add("mess");
+					return false;
+				}
+			
+		}
+	if(pwd.value.length<6)
+		{
+			mess[2].textContent="Password must be greater than 6 character";
+			mess[2].classList.remove("success");
+			mess[2].classList.add("mess");
+			return false;
+		}
+}
+// phone validation
+function phoneValidation()
+	{
+	     var phone=document.querySelector("#phone");
+		 var icon7=document.querySelector(".icon7");
+		 var icon8=document.querySelector(".icon8");
+		if(phone.value.length===0)
+			{
+			   mess[3].textContent="Please fill this field";
+			   mess[3].classList.remove("success");
+			   mess[3].classList.add("mess");
+			   return false;
+			 }
+		if(phone.value.length<10)
+			{    
+				if(phone.value[0]=="9" || phone.value[0]=="8" ||phone.value[0]=="7")
+					{   mess[3].textContent="Mobile number must be of 10 digits";
+					    mess[3].classList.remove("success");
+					    mess[3].classList.add("mess");
+					    return false;
+					   
+						
+					}
+				 else
+					 {
+						 mess[3].textContent="Mobile Number can't start with " + " " + phone.value[0];
+						 mess[3].classList.remove("success");
+						 mess[3].classList.add("mess");
+						  return false;
+						 
+					 }
+			}
+		if(phone.value.length===10)
+			{   if(phone.value[0]=="9" || phone.value[0]=="8" ||phone.value[0]=="7")
+					{
+						mess[3].textContent="Mobile Number is valid";
+						mess[3].classList.remove("mess");
+						mess[3].classList.add("success");
+						return addvalidation();
+						
+					}
+				else
+					{
+						mess[3].textContent="Please enter a valid mobile number";
+						mess[3].classList.remove("success");
+						mess[3].classList.add("mess");
+						  return false;
+						
+					}
+				
+			}
+		if(phone.value.length>10)
+			{    
+				 mess[3].textContent="Mobile number can't be greater than 10 digits";
+				 mess[3].classList.remove("success");
+				 mess[3].classList.add("mess");
+				  return false;
+				
+				
+				 
+			}
+	}
+		// address validation
+		function addvalidation()
+		{
+			if(add.value.length===0)
+				{
+					mess[4].textContent="Please fill this field";
+					mess[4].classList.remove("success");
+					mess[4].classList.add("mess");
+					return false;
+				}
+			if(add.value.length>=4)
+				{
+					mess[4].textContent="Address is valid";
+					mess[4].classList.remove("mess");
+					mess[4].classList.add("success");
+					
+				}
+			if(add.value.length<4)
+				{
+					mess[4].textContent="Please enter a valid address";
+					mess[4].classList.remove("mess");
+					mess[4].classList.add("success");
+					
+				}
+				
+		}
+	
+
+	</script>
+
+
+
+
+
+<%- include('partials/footer') -%>

@@ -1,0 +1,118 @@
+<%- include('partials/header') -%>
+<style>
+ .product_img
+	{
+		width:100%;
+		height:100%;
+		box-shadow:5px 5px 3px rgba(0,0,0,0.6);
+		
+	}
+	.product_img img
+	{
+		width:100%;
+		height:250px;
+	}
+	.product_img a
+	{
+		color:blue;
+		padding:1px 3px;
+	}
+	.product_img a:hover
+	{
+		color:blue;
+		padding:1px 3px;
+	}
+	.product_img p span
+	{
+		color:yellow;
+	}
+	.product_img p span i
+	{
+		font-size:20px;
+	}
+	.product_img p 
+	{
+		color:blue;
+	}
+	.review:hover
+	{
+		text-decoration:none;
+	}
+	
+	.product_img button i
+	{
+		color:red;
+	}
+	.product_img button:hover i
+	{
+		color:white;
+	}
+	#review:hover
+	{
+		color:green;
+	}
+	.fa-tag
+	{
+		color:green;
+	}
+</style>
+
+
+<!-- ============   Product section start from here =============================================-->
+		  <div class="container mt-5 ">
+			  <div class="row ">
+				  
+			  <% products.forEach(function(product){%>	
+				  
+			  <div class="col-12 col-sm-6 col-md-3  mt-5 px-3">
+				  <div class="product_img bg-light" >
+				  <img src="<%= product %>" class="img-thubnail">
+				  <a>Slim Pant</a>	 
+				  <a style="float:right">&#8377; 1400</a>	
+					 <p class="py-2 px-1"><i class="fa fa-tag" aria-hidden="true"></i> Louis Phillipe <span style="float:right"> 
+						<i class="fa fa-star" aria-hidden="true"></i>
+						<i class="fa fa-star" aria-hidden="true"></i>
+						<i class="fa fa-star" aria-hidden="true"></i>
+						<i class="fa fa-star" aria-hidden="true"></i>
+						<i class="fa fa-star" aria-hidden="true"></i>
+					    </span></p> 
+				<a href="#"><button type="button" class="btn btn-outline-danger m-1"> <i class="fa fa-shopping-cart"></i></button></a>
+				<a href="#"><button type="button" class="btn btn-outline-danger m-1 "><i class="fa fa-heart-o"></i> </button></a>
+				<a href="#" class="pt-2" style="float:right;text-decoration:none;" id="review">( 2 reviews )</a>	  
+			
+				  </div>
+			  </div>
+				  
+			  <%});%>
+			  </div>
+		  </div>
+		
+<!-- ============   Product section end from here =============================================-->
+
+<!--<div class="img-thumbnail mt-4 p-2">
+						   <a class="img-thumbnail bg-warning"  >
+							   <span style="color: #fff"><%= data.rating %></span>
+							   <i class="fa fa-star " style="color: #fff"></i>
+						   </a>
+					       <a class="ml-2"> Awesome </a>
+						   <hr>
+						   <a class="img-thumbnail " style="color:blue" href="#"><%= data.auther.name %></a>
+						   <a class="" style="float: right;color: green"><%= data.created.toDateString() %></a>
+						   <br><br>
+						   <div class="">
+						    <p class="text-center" style="font-size: 14px;"><%= data.text %></p>
+							  <a href="#" style="text-decoration: none">
+							    <button type="button" class="btn btn-primary">Edit</button>
+							   </a>
+							   <a href="#" style="text-decoration: none">
+							    <button type="button" class="btn btn-danger ml-2">Delete</button>
+							   </a>
+							   <a href="/cloths/comment/<%= products._id %>/review/<%= cat %>" style="text-decoration: none;float:right">
+							    <button type="button" class="btn btn-outline-primary">Read more reviews</button>
+							   </a>
+						   </div>
+					   </div>-->
+
+
+
+<%- include('partials/footer') -%>

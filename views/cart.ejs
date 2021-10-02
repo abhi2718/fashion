@@ -1,0 +1,87 @@
+<%- include('partials/header') -%>
+
+<style>
+.mycart
+{
+   box-shadow:5px 5px 3px rgba(0,0,0,0.6);
+  
+}
+.price
+	{
+		box-shadow:5px 5px 3px rgba(0,0,0,0.6);
+	}
+
+</style>
+<div class="d-none d-sm-none d-md-block"><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></div>
+   <div class="container mycart mt-lg-5">
+	   <div class="row">
+	       <div class="col-6 col-sm-6 pt-3">
+		     <p style="color:#fff ;" >Shopping Cart</p>
+		   </div>
+		    <div class="col-6 col-sm-6  pt-3">
+		     <p style="color:#fff;float:right;" >
+				 <i class="fa fa-circle" aria-hidden="true" style="color:blue;font-size:10px; "></i>
+				 <%= currentUser.username %> 
+			</p>
+		   </div>
+	   </div>
+	</div>
+<% if(p_count>0){%>
+<div class="container mt-3" style="background-color:#fff">
+   <div class="row">
+	   <div class="col-12 col-sm-12 col-md-6 col-lg-8">
+		  <% cart.forEach(function(data){%>
+		   <div class="row price mb-2 p-0" >
+		       <div class="col-4 col-sm-4">
+			      <img src="<%= data.img %>" width="100%" height="150px">
+			   </div>
+		       <div class="col-8 col-sm-8">
+			       <a style="font-size:14px;color:blue;text-decoration:none"><%= data.pb %></a>
+			       <a style="float:right;font-size:15px;color:blue;text-decoration:none">Price: ₹<%= data.price %>.00</a>
+				  <br>
+				  <a style="font-size:14px;color:gray;text-decoration:none"><%= data.pn %></a>
+				  <br>
+				  <a style="font-size:14px;color:green;text-decoration:none">In stock</a>
+				  <br>
+				  <a style="font-size:14px;color:blue;text-decoration:none">Eligible for FREE shipping</a>
+				   <div class="pt-3 pb-2 " style="border-top:1px solid black">
+				    <a href="/cloths/decrease/<%= data._id %>/Qty/<%= data.cartQty %>" style="text-decoration:none">
+						<button class="btn btn-outline-primary btn-sm">
+							<i class="fa fa-minus" aria-hidden="true"></i>
+						</button>
+					</a>
+					   <%= data.total %>
+					<button class="btn btn-outline-primary btn-sm"><%= data.cartQty %></button>
+					   
+					<a href="/cloths/increase/<%= data._id %>/Qty/<%= data.cartQty %>" style="text-decoration:none" >
+						<button class="btn btn-outline-primary btn-sm" onclick="subtotal()">
+							<i class="fa fa-plus" aria-hidden="true"></i>
+						</button>
+					</a>
+				    <a href="/cloths/delete/<%= data._id %>"><button class="btn btn-outline-primary btn-sm" style="float:right"><i class="fa fa-trash-o" aria-hidden="true"></i>  </button></a>
+			      </div>
+			   </div>
+			 </div>
+		   <%});%>
+		   
+	   </div>
+	  <div class="col-12 col-sm-12 col-md-6  col-lg-4 pt-3">
+	           <div class="subtotal img-thumbnail pb-2" style=" box-shadow:5px 5px 3px rgba(0,0,0,0.6);">
+					<p style="font-size:14px;color:blue;">Part of your order qualities for FREE Delivery.</p>
+				    <a style="font-size:14px;color:blue;text-decoration:none">Subtotal (<%= p_count %> iteams):₹ <%= total %> </a>
+					<br>
+					<input type="checkbox"> <a style="font-size:14px;color:blue;text-decoration:none">This order cantains a gift</a>
+					<br>
+					<br>
+					<a href="/cloths/checkout" style="text-decoration:none"><button class="btn btn-warning btn-block" style=" box-shadow:5px 5px 3px rgba(0,0,0,0.6);">Proceed to buy</button></a>
+				</div>
+	 </div>
+	
+	</div>
+</div>
+		<%}else{%>
+           <div class="mx-5 px-5" style=" " >
+               <p class="img-thumbnail mt-4 p-2">Your's cart is empty </p>
+            </div>
+      <%}%>
+<%- include('partials/footer') -%>

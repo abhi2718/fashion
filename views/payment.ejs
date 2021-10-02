@@ -1,0 +1,77 @@
+<%- include('partials/header') -%>
+<style>
+h2,button,img-thumbnail
+{
+   box-shadow:5px 5px 3px rgba(0,0,0,0.6);
+  
+}
+
+</style>
+<div><p class="mt-5">&nbsp;&nbsp;&nbsp;</p></div>
+<div class="container">
+   <div class="row">
+	<div class="col-12 col-sm-12 col-md-3"></div>
+	  <div class="col-12 col-sm-12 col-md-6 ">
+	   
+	      <h2 class="text-center" style="color:#fff">Payment Method </h2>
+		  <div class="img-thumbnail mt-4 p-5">
+			  <p class="message" style="color:red"></p>
+		      <form action="/cloths/payment" onsubmit=" return validation()"  method="post">
+			    <input type="checkbox"  value="Credit Card" id="paypal" class="product-list" onclick="return paymentValidation(1)" name="paymethod" >
+				  <label for="paypal" style="color:blue"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> Credit Card</label>
+				  <br>
+				<input type="checkbox"  value="Debit card" id="credt" class="product-list" onclick="return paymentValidation(2)" name="paymethod">
+				  <label for="paypal" style="color:blue"><i class="fa fa-credit-card" aria-hidden="true"></i> Debit card</label>
+				  <br>
+				<input type="checkbox"  value="Net Banking" id="wallet" class="product-list" onclick="return paymentValidation(3)" name="paymethod">
+				  <label for="wallet" style="color:blue"><i class="fa fa-university" aria-hidden="true"></i> Net Banking</label>
+				  <br>
+				  <input type="checkbox"  value="Paytm" id="wallet" class="product-list" onclick="return paymentValidation(4)" name="paymethod">
+				  <label for="wallet" style="color:blue"> Paytm </label>
+				  
+				  <button type="submit" class="btn btn-primary btn-block">continue</button>
+			  </form>
+		  
+		  
+		  </div>
+	   
+	   </div>
+	<div class="col-12 col-sm-12 col-md-3"></div>
+	
+	</div>
+
+</div>
+
+<%- include('partials/footer') -%> 
+<script type="text/javascript">
+    $('.product-list').on('change', function() {
+        $('.product-list').not(this).prop('checked', false);  
+    });
+	
+function validation()
+{ 
+
+	return check();
+}
+
+       var count=0;
+		function paymentValidation(num)
+		{  
+			count=num;
+			
+		}
+	function check()
+	{
+		if(count===0)
+			{   
+				document.querySelector(".message").textContent="Please select any payment method";
+				return false;
+			}
+		else
+			{
+				document.querySelector(".message").textContent=" ";
+			}
+	}
+
+	
+  </script>

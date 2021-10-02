@@ -1,0 +1,117 @@
+<%- include('partials/header') -%>
+<style>
+
+button
+	{
+		 box-shadow:5px 5px 3px rgba(0,0,0,0.6); 
+	}
+	
+.star{
+       color: goldenrod;
+       font-size: 2.4rem;
+	}
+	#comment
+	{
+		background:linear-gradient(45deg,blueviolet,deeppink);
+		 box-shadow:5px 5px 3px rgba(0,0,0,0.6); 
+	}
+
+
+
+</style>
+<div class="container mt-5 ">
+    <div class="row mt-5 ">
+		<div class="col-sm-12 col-md-2"></div>
+	    <div class="col-sm-12 col-md-8  mt-lg-4 py-3" id="review">
+			<a href="/cloths/<%= cat %>/product/<%= products._id%>" class="py-5"><button class="btn btn-light btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>  Go back </button></a>
+		       <% products.comments.forEach(function(data){%>
+					   <div class=" mb-4 mt-1 p-2 " id="comment">
+						   <a class="img-thumbnail bg-warning ">
+							   <span style="color: #fff"><%= data.rating %></span>
+							   <i class="fa fa-star " style="color: #fff"></i>
+						   </a>
+					       <a class="ml-2" style="color:#fff;font-weight:500" > Awesome </a>
+						   <hr>
+						   <a class="img-thumbnail " style="color:blue" href="#"><%= data.auther.name %></a>
+						   <a class="" style="float: right;color:#fff;font-weight:500"><%= data.created.toDateString() %></a>
+						   <br><br>
+						   <div class="">
+						    <p class="text-center" style="font-size: 14px;color:#fff"><%= data.text %></p>
+							  
+							   
+							   <form action="/cloths/comment/<%=  data._id%>/delete/<%= cat %>?_method=DELETE" method="post">
+								    <a href="/cloths/editComment/<%=  data._id%>/product/<%=products._id %>/gender/<%= cat %>" style="text-decoration: none">
+							        <button type="button" class="btn btn-primary">Edit</button>
+							        </a>
+		                        <button type="submit" class="btn btn-danger ml-2 ">Delete</button>
+					           </form>
+							   
+						   </div>
+					   </div>
+					   
+					   <%});%>
+		</div>
+		<div class="col-sm-12 col-md-2"></div>
+	</div>
+</div>
+
+
+
+<%- include('partials/footer') -%>
+<script type="text/javascript">
+	
+	 var rate=document.querySelector(".rate");
+	 var review=document.querySelector("#review");
+		 
+//initial setup
+document.addEventListener('DOMContentLoaded', function(){
+  addListeners();
+  setRating(); //based on value inside the div
+});
+
+function addListeners(){
+  var stars = document.querySelectorAll('.star');
+  [].forEach.call(stars, function(star, index){
+    star.addEventListener('click', (function(idx){
+      console.log('adding rating on', index);
+      document.querySelector('.stars').setAttribute('data-rating',  idx + 1);
+		
+        var star_data=document.querySelector('.stars').getAttribute('data-rating');
+		rate.setAttribute('value',star_data);
+		var score=document.querySelector('.score');
+		score.textContent=star_data;
+		var ans=rate.getAttribute('value',star_data);
+		console.log('Rating is now', idx+1);
+      setRating();
+    }).bind(window,index) );
+  });
+  
+}
+
+function setRating(){
+  var stars = document.querySelectorAll('.star');
+  var rating = parseInt( document.querySelector('.stars').getAttribute('data-rating') );
+  [].forEach.call(stars, function(star, index){
+    if(rating > index){
+      star.classList.add('rated');
+      console.log('added rated on', index );
+    }else{
+      star.classList.remove('rated');
+      console.log('removed rated on', index );
+    }
+  });
+}
+		
+
+var review=document.querySelector('#review');
+	review.addEventListener('click',function(){
+		var comment=document.querySelector('.comment');
+		comment.classList.toggle("inp");
+		comment.setAttribute("placeholder","PlZ give your's precious feedback")
+	});
+	
+	
+
+
+
+</script>
